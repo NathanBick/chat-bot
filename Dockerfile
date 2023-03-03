@@ -12,6 +12,7 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-root --without dev-dependencies
 
 # Add the application source code.
+COPY creds.py /app/
 COPY chat-bot.py /app/
 
 CMD ["streamlit", "run","chat-bot.py","--server.port","8080"]

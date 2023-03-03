@@ -3,8 +3,8 @@ env: flex
 service: chat-bot-1
 
 # get environment variables from secrets
-env_variables:
-  OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
+#env_variables:
+#  OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
 
 runtime_config:
   document_root: public
