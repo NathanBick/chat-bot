@@ -1,5 +1,5 @@
 runtime: python311
-env: flex
+env: standard
 service: chat-bot-1
 
 # get environment variables from secrets
