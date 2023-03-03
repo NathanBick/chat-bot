@@ -1,9 +1,10 @@
 import streamlit as st
 import openai
 from datetime import datetime
+import os
 
-from creds import open_ai_api_key
-from config import chat_gpt_chatml
+# get openai api key from environment variable
+open_ai_api_key = os.environ.get("OPEN_AI_API_KEY")
 
 openai.api_key = open_ai_api_key
 
