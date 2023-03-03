@@ -5,7 +5,6 @@ import os
 
 # get openai api key from environment variable
 open_ai_api_key = os.environ.get("OPEN_AI_API_KEY")
-
 openai.api_key = open_ai_api_key
 
 # current date
@@ -19,7 +18,6 @@ button = st.button("Send Chat")
 
 # chatbot response if button is pressed
 if button:
-
     # chatbot response
     completion = openai.ChatCompletion.create(
     model="gpt-3.5-turbo", 
@@ -33,4 +31,3 @@ if button:
     text = str(completion['choices'][0]['message']["content"])
 
     st.write(text)
-
