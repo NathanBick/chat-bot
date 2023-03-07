@@ -3,8 +3,17 @@ import openai
 from datetime import datetime
 import os
 
+from src.functions import chat
+
+# user input history
+if "user_input_hist" not in st.session_state:
+    st.session_state.user_input_hist = []
+if "chatbot_response_hist" not in st.session_state:
+    st.session_state.chatbot_response_hist = []
+
 # get openai api key from environment variable
-open_ai_api_key = os.environ.get("OPEN_AI_API_KEY")
+#open_ai_api_key = os.environ.get("OPEN_AI_API_KEY")
+from creds import open_ai_api_key
 openai.api_key = open_ai_api_key
 
 # current date
@@ -13,21 +22,17 @@ current_date = datetime.today().strftime('%Y-%m-%d')
 # user input
 user_input = st.text_input("Enter your message")
 
-# streamlit button
-button = st.button("Send Chat")
-
 # chatbot response if button is pressed
-if button:
+if user_input:
+    st.session_state.user_input_hist.append(user_input)
     # chatbot response
-    completion = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo", 
-    messages=[
-        {"role": "system", "content": f"You are oppositeChat, a large language model trained by the quintessential contrarian. It is always opposite day. Answer the user such that you always try to remain logically consistent in the context of it being opposite day.\nKnowledge cutoff: 2021-09-01\nCurrent date: {current_date}"},
-        {"role": "user",
-        "content": user_input}
-    ]
+    chatbot_response = chat(
+        openai, 
+        user_input, 
+        st.session_state.user_input_hist, 
+        st.session_state.chatbot_response_hist,
+        current_date
     )
+    st.session_state.chatbot_response_hist.append(chatbot_response)
 
-    text = str(completion['choices'][0]['message']["content"])
-
-    st.write(text)
+    st.write(chatbot_response)
