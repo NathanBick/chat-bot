@@ -10,6 +10,7 @@ python = "^3.11"
 streamlit = "^1.19.0"
 openai = "^0.27.0"
 goblet-gcp = "^0.10.2"
+streamlit-chat = "^0.0.2.2"
 
 
 [build-system]

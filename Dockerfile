@@ -13,6 +13,7 @@ RUN poetry install --no-interaction --no-root --without dev-dependencies
 
 # Add the application source code.
 COPY src/ /app/src/
+COPY creds.py /app/
 COPY chat-bot.py /app/
 
 CMD ["streamlit", "run","chat-bot.py","--server.port","8080"]
