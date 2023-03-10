@@ -1,7 +1,7 @@
 import streamlit as st
+from streamlit_chat import message
 import openai
 from datetime import datetime
-import os
 
 from src.functions import chat
 
@@ -35,4 +35,16 @@ if user_input:
     )
     st.session_state.chatbot_response_hist.append(chatbot_response)
 
-    st.write(chatbot_response)
+    # display user input and chatbot response for the whole history
+    # display it in reverse order
+    for i in range(len(st.session_state.user_input_hist)):
+        message(
+            st.session_state.user_input_hist[-(i+1)], 
+            is_user=True, 
+            key=str(i)+"u"
+        )
+        message(
+            st.session_state.chatbot_response_hist[-(i+1)], 
+            is_user=False, 
+            key=str(i)+"c"
+        )
